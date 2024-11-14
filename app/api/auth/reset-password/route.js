@@ -20,8 +20,9 @@ export async function POST(req) {
       .update(resetToken)
       .digest("hex");
     user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
-
+    
     await user.save();
+    console.log("hello", "user");
 
     // TODO: Send email with reset token
     const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`;

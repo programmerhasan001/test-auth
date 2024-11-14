@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
+import { NextResponse } from "next/server";
 
-export async function sendEmail({ to, subject, text, html }) {
+export async function POST(req) {
   try {
     // Configure the transporter with Gmail SMTP
     const transporter = nodemailer.createTransport({
@@ -15,11 +16,11 @@ export async function sendEmail({ to, subject, text, html }) {
 
     // Define email options
     const mailOptions = {
-      from: process.env.EMAIL_FROM,
-      to,
-      subject,
-      text,
-      html,
+      from: "programmermdhasan@gmail.com",
+      to: "programmerhasan.bd@gmail.com",
+      subject: "Hello from Gmail SMTP",
+      text: "This is a plain text email body",
+      html: "<p>This is an HTML email body</p>",
     };
 
     // Send email
@@ -28,5 +29,5 @@ export async function sendEmail({ to, subject, text, html }) {
   } catch (error) {
     console.error("Error sending email:", error);
   }
-  console.log("email send successfully");
+  return NextResponse.json({ msg: "success" });
 }
